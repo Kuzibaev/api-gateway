@@ -1,0 +1,13 @@
+fastapi==0.110.0
+uvicorn==0.28.0
+PyJWT==2.8.0
+
+# async http requests & fast dns resolving
+async-timeout==4.0.3
+aiohttp==3.9.3
+aiodns==3.1.1
+
+# for test purposes
+flake8==7.0.0
+ipdb==0.13.13
+ipython==8.22.2

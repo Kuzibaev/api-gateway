@@ -1,0 +1,40 @@
+version: '3.7'
+
+services:
+  api-gateway:
+    image: kuzibaev/test-api-gateway:latest
+    command: sh -c "uvicorn main:app --reload --host 0.0.0.0"
+    build:
+      context: ./api_gateway
+      dockerfile: Dockerfile
+    env_file:
+      - ./api_gateway/.env
+    ports:
+      - 8001:8000
+    depends_on:
+      - users
+      - orders
+    volumes:
+      - ./api_gateway:/app
+
+  users:
+    image: kuzibaev/test-users:latest
+    command: sh -c "uvicorn main:app --reload --host 0.0.0.0"
+    build:
+      context: ./users
+      dockerfile: Dockerfile
+    env_file:
+      - ./users/.env
+    volumes:
+      - ./users:/app
+
+  orders:
+    image: kuzibaev/test-orders:latest
+    command: sh -c "uvicorn main:app --reload --host 0.0.0.0"
+    build:
+      context: ./orders
+      dockerfile: Dockerfile
+    env_file:
+      - ./orders/.env
+    volumes:
+      - ./orders:/app
